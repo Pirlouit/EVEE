@@ -1,0 +1,46 @@
+ - Add vocal commands like:
+	- the current weather
+		https://developer.yahoo.com/weather/
+	- the 5 days forecast
+	- read some news
+ - Add calendra with national day and st (today, tomorow)
+	https://github.com/theofidry/ephemeris/tree/master/src
+
+
+Soundcloud search: https://api-v2.soundcloud.com/search?q=Jacidorex&sc_a_id=a4ac6fee-79fd-4f9d-a0f5-386f34bbc876&variant_ids=&facet=model&user_id=576903-322993-135114-44400&client_id=LegNTza81OuwVaDfYELQW1X71tY1sot8&limit=10&offset=0&linked_partitioning=1&app_version=1510238274
+
+https://api-v2.soundcloud.com/search?client_id=LegNTza81OuwVaDfYELQW1X71tY1sot8&q=<query>
+
+<url> = results.Collection[0].uri
+https://w.soundcloud.com/player/?url=<url>
+
+widget: https://developers.soundcloud.com/docs/api/html5-widget
+-----------------------------------------------------------------------------
+ - js function to get a map, directions, view from a place
+	- we can possibly enhance this integrating directly the map !!!
+		-> check at: https://developers.google.com/maps/
+	https://developers.google.com/places/web-service/details
+	https://developers.google.com/maps/documentation/static-maps/intro
+	https://developers.google.com/maps/documentation/javascript/adding-a-google-map
+ 
+ ov js function for youtube video (audio) through a few key words -> done
+	- might check if we can pause the video
+		-> check at: https://developers.google.com/youtube/iframe_api_reference
+
+ - fonction plus simpleet plus organisées
+ - revoir toute la structure du code...
+
+----------------------------------------------------------------------------
+X check HomeMirror -> Made for android..
+X fichier de config commun
+	var CONFIG = require('./config.json');
+	var dbPort = CONFIG.dbPort;
+X test speeechRecognition grammar
+	https://demo.tutorialzine.com/2017/08/converting-from-speech-to-text-with-javascript/
+	artyom.js
+X test speechSynthésis -> now:
+	-need to be able to chance the voice/lang -> supposed to be done
+
+----------------------------------------------------------------------------
+
+- Google calendar...

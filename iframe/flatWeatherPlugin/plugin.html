@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Weather Plugin</title>
+		<link href="../../fonts/roboto.css" rel="stylesheet">
+		<link href="css/flatWeatherPlugin.css" rel="stylesheet">
+
+		<script src="js/jquery-2.1.1.min.js"></script>		
+		<script src="../../config/config.js"></script>
+		<script src="js/jquery.flatWeatherPlugin.js"></script>  
+
+		<script type="text/javascript">
+		$(document).ready(function() {
+			$("#plugin").flatWeatherPlugin(mainConfig.widgetWeather);
+		});
+		</script>
+	</head>
+	<body>
+		<div id="plugin"></div>	
+	</body>
+</html>

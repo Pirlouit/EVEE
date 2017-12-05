@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Evee - Smart Mirror</title>
+
+	<meta name="google" content="notranslate" />
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+	<meta http-equiv="Pragma" content="no-cache"/>
+	<meta http-equiv="Expires" content="0"/>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="mobile-web-app-capable" content="yes">
+	
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="fonts/roboto.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	
+	<!-- Librairies -->
+	<script type="text/javascript" src="js/lib/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment-with-locales.js"></script>
+	<script type="text/javascript" src="js/lib/Artyom.js"></script>
+	<!-- Config -->
+	<script type="text/javascript" src="config/config.js"></script>
+	<!-- Javascript -->
+	<script type="text/javascript" src="js/MainFunc.js"></script>
+	<script type="text/javascript" src="js/ClockDate.js"></script>
+	<script type="text/javascript" src="js/SpeechReco.js"></script>
+	
+	<script type="text/javascript" src="js/Test.js"></script>
+
+</head>
+<body>
+	<div class="region fullscreen below"><div class="container"></div></div>
+	<div class="region top bar">
+		<div class="container"></div>
+		<div class="region top left"><div id="topLeft" class="container"></div></div>
+		<div class="region top center"><div class="container"></div></div>
+		<div class="region top right"><div class="container" id="topRight">
+			<iframe width="400px" height="500px" frameborder="0" src="iframe/flatWeatherPlugin/plugin.html"></iframe>
+		</div></div>
+	</div>
+	<div class="region upper third"><div class="container"></div></div>
+	<div class="region middle center"><div class="container" id="divCenter"></div></div>
+	<div class="region lower third"><div class="container"><br/></div></div>
+	<div class="region bottom bar">
+		<div class="container"></div>
+		<div class="region bottom left"><div class="container" id="musicContainer"></div></div>
+		<div class="region bottom center"><div class="container"></div></div>
+		<div class="region bottom right"><div class="container"></div></div>
+	</div>
+	<div class="region fullscreen above"><div class="container"></div></div>
+</body>
+</html>

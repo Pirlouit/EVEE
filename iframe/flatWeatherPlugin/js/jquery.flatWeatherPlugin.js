@@ -1,4 +1,6 @@
-﻿var lang;
+﻿var wheatherInfo = null;
+
+var lang;
 var timeFormat;
 var loc;
 var descTranslate = {
@@ -27,33 +29,66 @@ var descTranslate = {
 "Cloudy"                  :"Nuageux" }
 
 var synthWeatherDesc = {
-	"Partly Cloud"            :"Partiellement Nuageux",
-	"Showers"                 :"Averses",
-	"AM Showers"              :"Averses Matinales",
-	"PM Showers"              :"Averses En Soirée",
-	"PM Thunderstorms"        :"Orages En Soirée",
-	"Scattered Thunderstorms" :"Orages Dispersés",
-	"Light Rain with Thunder" :"Fine pluie avec orage",
-	"Thunderstorms"           :"Orages",
-	"Heavy Rain"              :"Forte pluie",
-	"Mostly Sunny"            :"Plutot Ensoleillé",
-	"Light Rain"              :"Fine Pluie",
-	"Fog"                     :"Brouillard",
-	"Fair"                    :"Beau",
-	"Sunny"                   :"Ensoleillé",
-	"AM Rain"                 :"Pluie Matinale",
-	"PM Rain"                 :"Pluis En Soirée",
-	"Mostly Cloudy"           :"Plutôt Nuageux",
-	"Isolated Thunderstorms"  :"Orages Isolés",
-	"Thundershowers"          :"Orages Pluvieux",
-	"Heavy Thunderstorms"     :"Forts Orages",
-	"Clear"                   :"Dégagé",
-	"Rain"                    :"Pluvieux",
-	"Cloudy"                  :"Nuageux" } 
- 
-function getPhraseFromWeather(){
-	var phrase = "Aujourd'hui, il fera 12° avec un temps .../accompagné de/d'...";
+	"Partly Cloud"            :"il fera artiellement Nuageux",
+	"Showers"                 :"il y aura des averses",
+	"AM Showers"              :"il y aura des averses Matinales",
+	"PM Showers"              :"il y aura des averses En Soirée",
+	"PM Thunderstorms"        :"il y aura des orages En Soirée",
+	"Scattered Thunderstorms" :"il y aura des orages Dispersés",
+	"Light Rain with Thunder" :"il y aura des fine pluie avec orage",
+	"Thunderstorms"           :"il y aura des orages",
+	"Heavy Rain"              :"il y aura des fortes pluie",
+	"Mostly Sunny"            :"il fera lutot ensoleillé",
+	"Light Rain"              :"il y aura de fine pluie",
+	"Fog"                     :"il y aura du brouillard",
+	"Fair"                    :"il fera beau",
+	"Sunny"                   :"il fera ensoleillé",
+	"AM Rain"                 :"il y aura des pluies matinale",
+	"PM Rain"                 :"il y aura des pluies en soirée",
+	"Mostly Cloudy"           :"il fera plutôt Nuageux",
+	"Isolated Thunderstorms"  :"il y aura des orages isolés",
+	"Thundershowers"          :"il y aura des orages pluvieux",
+	"Heavy Thunderstorms"     :"il y aura de forts orages",
+	"Clear"                   :"il fera Dégagé",
+	"Rain"                    :"il fera luvieux",
+	"Cloudy"                  :"il fera nuageux",
+	""						  :"il fera correct" }
+var synthWindDirection = {
+	"NE"  : "du nord-est",
+	"NNE" : "du nord-est",
+	"N"   : "du nord",
+	"NNO" : "du nord",
+	"NO"  : "du nord-ouest",
+	"ONO" : "du nord-ouest",
+	"O"	  : "de l'ouest",
+	"OSO" : "de l'ouest",
+	"SO"  : "du sud ouest",
+	"SSO" : "du sud ouest",
+	"S"   : "du sud",
+	"SSE" : "du sud",
+	"SE"  : "du sud-est",
+	"ESE" : "du sud-est",
+	"E"   : "de l'est",
+	"ENE" : "de l'est"
 }
+ 
+function getPhraseFromWeather(day){
+	if(mainConfig.lang !== "fr"){
+		artyom.say("Sorry but this feature is not available in you language.");
+		return;
+	}
+
+	var phrase = "Aujourd'hui" + " ";
+	if(true){
+		phrase += synthWeatherDesc[wheatherInfo.today.synthDesc];		
+		phrase += ". Les températures variront entre " + wheatherInfo.today.temp.min + " et " + wheatherInfo.today.temp.max + " degrés. ";
+		phrase += "Le vent soufflera en provenance "+ synthWindDirection[wheatherInfo.today.wind.direction] + " avec une vitesse moyenne de" + parseInt(parseFloat(wheatherInfo.today.wind.speed) * 0.621371)  + "kilomètres par heure.";
+		console.log(phrase);
+		return phrase;
+	}	
+}
+
+function splitDecimal(){}
 
 // the semi-colon before function invocation is a safety net against concatenated
 // scripts and/or other plugins which may not be closed properly.
@@ -461,8 +496,10 @@ function getPhraseFromWeather(){
 				out.today.temp.min = Math.round(input.item.forecast[0].low);
 				out.today.temp.max = Math.round(input.item.forecast[0].high);
 
-				if(lang == "fr")
+				if(lang == "fr"){
 					out.today.desc = descTranslate[input.item.condition.text.capitalize()]
+					out.today.synthDesc = input.item.condition.text.capitalize();
+				}
 				else
 					out.today.desc = input.item.condition.text.capitalize();
 
@@ -495,7 +532,7 @@ function getPhraseFromWeather(){
 					out.forecast.push(forecast);
 				}
 			}
-
+			wheatherInfo = out;
 			return out;
 
 		};
@@ -548,76 +585,8 @@ function getPhraseFromWeather(){
 		//Takes wind speed, direction in degrees and units 
 		//and returns a string ex. (8.5, 270, "metric") returns "W 8.5 km/h"
 		function formatWind(speed, degrees, units) {
-			var wd = degrees;
-			if ((wd >= 0 && wd <= 11.25) || (wd > 348.75 && wd <= 360))  {
-				wd = "N";
-			}
-			else if (wd > 11.25 && wd <= 33.75){
-				wd = "NNE";
-			}
-			else if (wd > 33.75 && wd <= 56.25){
-				wd = "NE";
-			}
-			else if (wd > 56.25 && wd <= 78.75){
-				wd = "ENE";
-			}
-			else if (wd > 78.75 && wd <= 101.25){
-				wd = "E";
-			}
-			else if (wd > 101.25 && wd <= 123.75){
-				wd = "ESE";
-			}
-			else if (wd > 123.75 && wd <= 146.25){
-				wd = "SE";
-			}
-			else if (wd > 146.25 && wd <= 168.75){
-				wd = "SSE";
-			}
-			else if (wd > 168.75 && wd <= 191.25){
-				wd = "S";
-			}
-			else if (wd > 191.25 && wd <= 213.75){
-				if(lang == "fr")
-					wd = "SSO"
-				else
-					wd = "SSW";
-			}
-			else if (wd > 213.75 && wd <= 236.25){
-				if(lang == "fr")
-					wd = "SO"
-				else
-					wd = "SW";
-			}
-			else if (wd > 236.25 && wd <= 258.75){
-				if(lang == "fr")
-					wd = "OSO"
-				else
-					wd = "WSW";
-			}
-			else if (wd > 258.75 && wd <= 281.25){
-				if(lang == "fr")
-					wd = "O"
-				else
-					wd = "W";
-			}
-			else if (wd > 281.25 && wd <= 303.75){
-				if(lang == "fr")
-					wd = "ONO"
-				else
-					wd = "WNW";
-			}
-			else if (wd > 303.75 && wd <= 326.25){
-				if(lang == "fr")
-					wd = "NO"
-				else
-					wd = "NW";
-			}
-			else if (wd > 326.25 && wd <= 348.75){
-				if(lang == "fr")
-					wd = "NNO"
-				else
-					wd = "NNW";
-			}
+			var wd = degreeToDirection(degrees);
+			wheatherInfo.today.wind.direction = wd;
 			if(units == "metric")
 				var s = parseInt(parseFloat(speed) * 0.621371);
 			else
@@ -625,6 +594,79 @@ function getPhraseFromWeather(){
 			var speedUnits = (units == "metric")?"km/h":"mph";
 			return wd + " " + s + " " + speedUnits;
 		};
+
+		function degreeToDirection(degrees){
+			var wd = degrees;
+			if ((wd >= 0 && wd <= 11.25) || (wd > 348.75 && wd <= 360))  {
+				return "N";
+			}
+			else if (wd > 11.25 && wd <= 33.75){
+				return "NNE";
+			}
+			else if (wd > 33.75 && wd <= 56.25){
+				return "NE";
+			}
+			else if (wd > 56.25 && wd <= 78.75){
+				return "ENE";
+			}
+			else if (wd > 78.75 && wd <= 101.25){
+				return "E";
+			}
+			else if (wd > 101.25 && wd <= 123.75){
+				return "ESE";
+			}
+			else if (wd > 123.75 && wd <= 146.25){
+				return "SE";
+			}
+			else if (wd > 146.25 && wd <= 168.75){
+				return "SSE";
+			}
+			else if (wd > 168.75 && wd <= 191.25){
+				return "S";
+			}
+			else if (wd > 191.25 && wd <= 213.75){
+				if(lang == "fr")
+					return "SSO"
+				else
+					return "SSW";
+			}
+			else if (wd > 213.75 && wd <= 236.25){
+				if(lang == "fr")
+					return "SO"
+				else
+					return "SW";
+			}
+			else if (wd > 236.25 && wd <= 258.75){
+				if(lang == "fr")
+					return "OSO"
+				else
+					return "WSW";
+			}
+			else if (wd > 258.75 && wd <= 281.25){
+				if(lang == "fr")
+					return "O"
+				else
+					return "W";
+			}
+			else if (wd > 281.25 && wd <= 303.75){
+				if(lang == "fr")
+					return "ONO"
+				else
+					return "WNW";
+			}
+			else if (wd > 303.75 && wd <= 326.25){
+				if(lang == "fr")
+					return "NO"
+				else
+					return "NW";
+			}
+			else if (wd > 326.25 && wd <= 348.75){
+				if(lang == "fr")
+					return "NNO"
+				else
+					return "NNW";
+			}
+		}
 
 
 })( jQuery, window, document );

@@ -20,19 +20,28 @@
 	<!-- Librairies -->
 	<script type="text/javascript" src="js/lib/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment-with-locales.js"></script>
+	<script type="text/javascript" src="js/lib/axios.min.js"></script>
 	<script type="text/javascript" src="js/lib/Artyom.js"></script>
+	<script type="text/javascript" src="js/lib/howler.js"></script>
 	<!-- Config -->
 	<script type="text/javascript" src="config/config.js"></script>
-	<!-- Javascript -->
+	<!-- Javascript -->	
+	<script type="text/javascript" src="/iframe/flatWeatherPlugin/js/jquery.flatWeatherPlugin.js"></script>
+	<script type="text/javascript" src="js/SpeechReco.js"></script>
 	<script type="text/javascript" src="js/MainFunc.js"></script>
 	<script type="text/javascript" src="js/ClockDate.js"></script>
-	<script type="text/javascript" src="js/SpeechReco.js"></script>
+	<script type="text/javascript" src="js/Camera.js"></script>
+	
 	
 	<script type="text/javascript" src="js/Test.js"></script>
 
 </head>
 <body>
-	<div class="region fullscreen below"><div class="container"></div></div>
+	<div id="trash" style="display: none;"></div>
+	<div class="region fullscreen below">
+		<div class="container">
+		</div>
+	</div>
 	<div class="region top bar">
 		<div class="container"></div>
 		<div class="region top left"><div id="topLeft" class="container"></div></div>
@@ -50,6 +59,14 @@
 		<div class="region bottom center"><div class="container"></div></div>
 		<div class="region bottom right"><div class="container"></div></div>
 	</div>
-	<div class="region fullscreen above"><div class="container"></div></div>
+	<div class="region fullscreen above"><div class="container">
+		<div id="cameraContainer" style="display: none;">			
+			<div style="background-color: black; opacity: 0.9; width: 100%; height: 100%; position: absolute; top:0; left:0;"></div>	
+			<video id="camera-stream" style="position: absolute; top:50%; left: 50%; transform: translate(-50%, -50%);"></video>
+		    <img id="snap" style="position: absolute; top:50%; left: 50%; transform: translate(-50%, -50%);"/>
+		    <!-- Hidden canvas element. Used for taking snapshot of video. -->
+		    <canvas style="visibility: hidden;"></canvas>
+		</div>		
+	</div></div>
 </body>
 </html>

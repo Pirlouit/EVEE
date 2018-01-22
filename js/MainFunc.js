@@ -8,8 +8,29 @@ function btnClick(){
 $(function(){
     //PlayYTSound("un mix chill");
     //BuildViewIframe("jardin lecocq clermont ferrand");
+   //setTimeout(FirstHello, 3000);  
 });
 
+function FirstHello()
+{    
+    artyom.say("Bonjour.");
+
+    var todayDate = moment().format("dddd D MMMM");
+    artyom.say("Aujourd'hui nous sommes le " + todayDate);
+
+    var heure = moment().format("H");
+    if(heure == "12")
+        heure = "midi";
+    else if(heure == "0")
+        heure ="minuit";
+    else
+        heure = heure + " heures ";
+    var minute = moment().format("m");
+    minute = (minute == 0) ? "" : minute;    
+    artyom.say("Il est " + heure + minute);
+
+        
+}
 function PlayYTSound(query){
     console.log("PlayYTSound");
     $.get(

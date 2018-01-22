@@ -2,6 +2,8 @@ const artyom = new Artyom();
 
 $(function() {
     startContinuousArtyom();
+
+    $("#trash").flatWeatherPlugin(mainConfig.widgetWeather);
 });
 
 // This function activates artyom and will listen all that you say forever (requires https conection, otherwise a dialog will request if you allow the use of the microphone)
@@ -38,6 +40,56 @@ artyom.addCommands({
         artyom.say("il est " + heure + " heure " + now.format("mm"));
     }
 });
+
+artyom.addCommands({
+    indexes:["allume la caméra", "allume l'appareil photo"],
+    action:function(i){
+        turnOnCamera();
+        artyom.say("caméra allumé");
+    }
+});
+
+artyom.addCommands({
+    indexes:["éteint la caméra", "éteint l'appareil photo"],
+    action:function(i){
+        turnOffCamera();
+        artyom.say("caméra éteinte");
+    }
+});
+
+artyom.addCommands({
+    indexes:["prends une photo", "prends la photo"],
+    action:function(i){
+        takePhoto();        
+    }
+});
+
+artyom.addCommands({
+    indexes:["enregistre la photo", "sauve la photo"],
+    action:function(i){
+        savePhoto();        
+    }
+});
+
+artyom.addCommands({
+    indexes:["supprime la photo", "annuler la photo"],
+    action:function(i){
+        turnOnCamera();        
+    }
+});
+
+/********* METEO *********/
+artyom.addCommands({
+    smart: true,
+    indexes:["quelle sera la météo *", "quelle est la météo *", "comment sera la météo *", "quel temps fera-t-il *"],
+    action:function(i, wildcard){
+        artyom.say(getPhraseFromWeather(wildcard));
+    }
+});
+
+
+
+
 
 // Afficher une carte d'une ville
 artyom.addCommands({
@@ -91,7 +143,7 @@ artyom.addCommands({
 
 // Stop la musique
 artyom.addCommands({
-    indexes:["arrête la musique", "coupe la musique","éteind la musique"], // These spoken words will trigger the execution of the command
+    indexes:["arrête la musique", "coupe la musique","éteint la musique"], // These spoken words will trigger the execution of the command
     action:function(i){ // Action to be executed when a index match with spoken word
         console.log("Music stoped");
         RemoveYTIframe();
@@ -104,6 +156,7 @@ artyom.addCommands({
     action:function(i){ // Action to be executed when a index match with spoken word
         console.log("Back to menu");
         RemoveCenterDivContent();
+        turnOffCamera();
     }
 });
 

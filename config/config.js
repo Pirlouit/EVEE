@@ -10,7 +10,7 @@ var mainConfig = {
         dateFormat: "dddd, LL" //https://momentjs.com/docs/#/displaying/ for more info
     },
     widgetWeather:{
-        location: "Bruxelles", //Any city
+        location: "Tournai", //Any city
         country: "BE", //City's country
         view: "full", //full, partial, simple, today or forecast
         displayCityNameOnly: true, //true or false

@@ -6,6 +6,12 @@
  - Add calendra with national day and st (today, tomorow)
 	https://github.com/theofidry/ephemeris/tree/master/src
 
+ - Config via android
+  Keyboard: https://github.com/boppreh/keyboard#keyboard.send
+  Bluetooth: http://www.vishalavalani.com/programming-the-raspberry-pi-robot-for-bluetooth-with-python-part-1/
+  I/O file: http://www.pythonforbeginners.com/files/reading-and-writing-files-in-python
+  Android: https://developer.android.com/guide/topics/connectivity/bluetooth.html
+
 
 Soundcloud search: https://api-v2.soundcloud.com/search?q=Jacidorex&sc_a_id=a4ac6fee-79fd-4f9d-a0f5-386f34bbc876&variant_ids=&facet=model&user_id=576903-322993-135114-44400&client_id=LegNTza81OuwVaDfYELQW1X71tY1sot8&limit=10&offset=0&linked_partitioning=1&app_version=1510238274
 
@@ -38,9 +44,13 @@ X fichier de config commun
 X test speeechRecognition grammar
 	https://demo.tutorialzine.com/2017/08/converting-from-speech-to-text-with-javascript/
 	artyom.js
-X test speechSynthésis -> now:
+X test speechSynthésis:
 	-need to be able to chance the voice/lang -> supposed to be done
 
 ----------------------------------------------------------------------------
 
 - Google calendar...
+
+----------------------------
+Ubuntu: d0u23 - kitesurf06
+		root - root

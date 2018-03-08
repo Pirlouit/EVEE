@@ -8,7 +8,8 @@ function btnClick(){
 $(function(){
     //PlayYTSound("un mix chill");
     //BuildViewIframe("jardin lecocq clermont ferrand");
-   //setTimeout(FirstHello, 3000);  
+   //setTimeout(FirstHello, 3000);   
+   //FirstHello();
 });
 
 var hasSaidHello = false
@@ -19,12 +20,24 @@ function FirstHello()
         return;
 
     hasSaidHello = true;
-    artyom.say("Bonjour.");
 
     var todayDate = moment().format("dddd D MMMM");
-    artyom.say("Aujourd'hui nous sommes le " + todayDate);
 
+    var sentence =  "Bonjour.";
+    sentence +=     "Aujourd'hui nous sommes le " + todayDate + "."
+    sentence +=     getNowTimeSentence();
+    sentence +=     getPhraseFromWeather("");
+    sentence +=     "Je vous met maintenant votre radio préféré pour écouter les informations."
+    sentence +=     "Je vous souhaite une agréable journée."
+
+    responsiveVoice.speak(sentence);
+    setTimeout(BuildRadioIframe, 28000);
+    return;        
+}
+
+function getNowTimeSentence(){
     var heure = moment().format("H");
+
     if(heure == "12")
         heure = "midi";
     else if(heure == "0")
@@ -32,16 +45,9 @@ function FirstHello()
     else
         heure = heure + " heures ";
     var minute = moment().format("m");
-    minute = (minute == 0) ? "" : minute;    
-    artyom.say("Il est " + heure + minute);
+    minute = (minute == 0) ? "" : minute;
 
-    artyom.say(getPhraseFromWeather(""));
-
-    artyom.say("Je vous met maintenant votre radio préféré pour écouter les informations.");
-    setTimeout(BuildRadioIframe, 28000);
-
-    artyom.say("Je vous souhaite une agréable journée.");
-        
+    return "Il est " + heure + minute + ".";
 }
 function PlayYTSound(query){
     console.log("PlayYTSound");

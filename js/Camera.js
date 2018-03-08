@@ -130,12 +130,12 @@ $(function(){
             currentPhoto = null;
             console.log("Photo saved to cloud");
             console.log(res);
-            artyom.say("Photo enregistrée");
+            responsiveVoice.speak("Photo enregistrée");
             turnOnCamera();
         }).catch(function(err){
             console.log("Couln't save photo to cloud"); 
             console.error(err);
-            artyom.say("La photo n'a pas pu être enregistrée..");
+            responsiveVoice.speak("La photo n'a pas pu être enregistrée..");
         });
     }
     function blobToFile(theBlob, fileName){

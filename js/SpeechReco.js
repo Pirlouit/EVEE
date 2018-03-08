@@ -1,6 +1,7 @@
 const artyom = new Artyom();
 
 $(function() {
+    responsiveVoice.setDefaultVoice("French Female");
     startContinuousArtyom();
 
     $("#trash").flatWeatherPlugin(mainConfig.widgetWeather);
@@ -18,7 +19,7 @@ function startContinuousArtyom(){
             debug:true, // Show everything in the console
             speed:1 // talk normally
         }).then(function(){
-            console.log("Ready to work !");
+            console.log("Artyom is ready to work !");
         });
     },250);
 }
@@ -28,16 +29,8 @@ function startContinuousArtyom(){
 // Savoir l'heure
 artyom.addCommands({
     indexes:["quelle heure est-il", "tu peux me dire l'heure", "peu-tu me dire l'heure qu'il est", "il est quelle heure"],
-    action:function(i){
-        var now = moment();
-        var heure = now.format("HH");
-        //console.log(heure + ":" + now.format("mm"));
-        if(heure == "12")
-            heure = "midi";
-        if(heure == "00")
-            heure ="minuit";
-
-        artyom.say("il est " + heure + " heure " + now.format("mm"));
+    action:function(i){           
+        responsiveVoice.speak(getNowTimeSentence());
     }
 });
 
@@ -45,7 +38,7 @@ artyom.addCommands({
     indexes:["allume la caméra", "allume l'appareil photo"],
     action:function(i){
         turnOnCamera();
-        artyom.say("caméra allumé");
+        responsiveVoice.speak("caméra allumé");
     }
 });
 
@@ -60,7 +53,7 @@ artyom.addCommands({
     indexes:["éteint la caméra", "éteint l'appareil photo","coupe la caméra", "coupe l'appareil photo"],
     action:function(i){
         turnOffCamera();
-        artyom.say("caméra éteinte");
+        responsiveVoice.speak("caméra éteinte");
     }
 });
 
@@ -90,7 +83,7 @@ artyom.addCommands({
     smart: true,
     indexes:["quelle sera la météo *", "quelle est la météo *", "comment sera la météo *", "quel temps fera-t-il *"],
     action:function(i, wildcard){
-        artyom.say(getPhraseFromWeather(wildcard));
+        responsiveVoice.speak(getPhraseFromWeather(wildcard));
     }
 });
 
@@ -110,7 +103,7 @@ artyom.addCommands({
     indexes:["montre-moi la route pour aller de *"], // These spoken words will trigger the execution of the command
     action:function(i, wildcard){ // Action to be executed when a index match with spoken word
         console.log("Roads triggered -> "+ wildcard);
-        //artyom.say("Hey buddy ! How are you today?");
+        //responsiveVoice.speak("Hey buddy ! How are you today?");
     }
 });
 
@@ -130,7 +123,7 @@ artyom.addCommands({
     indexes:["dis-moi *"], // These spoken words will trigger the execution of the command
     action:function(i, wildcard){ // Action to be executed when a index match with spoken word
         console.log("Say triggered -> "+ wildcard);
-        artyom.say(wildcard);
+        responsiveVoice.speak(wildcard);
     }
 });
 
@@ -180,7 +173,7 @@ artyom.addCommands({
     indexes:["What time is it", "Can you tell me the time", "Could you tell me the time"], // These spoken words will trigger the execution of the command
     action:function(i){ // Action to be executed when a index match with spoken word
         console.log("WTII triggered");
-        //artyom.say("Hey buddy ! How are you today?");
+        //responsiveVoice.speak("Hey buddy ! How are you today?");
     }
 });
 
@@ -189,6 +182,6 @@ artyom.addCommands({
     indexes:["Show me a map of *"], // These spoken words will trigger the execution of the command
     action:function(i, wildcard){ // Action to be executed when a index match with spoken word
         console.log("Map triggered with " + wildcard + " as city..");
-        //artyom.say("Hey buddy ! How are you today?");
+        //responsiveVoice.speak("Hey buddy ! How are you today?");
     }
 });

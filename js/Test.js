@@ -33,6 +33,9 @@ $(function() {
 		//utter.lang = "en-US";
 		//speechSynth.speak(utter);
 		//showHideMsgStart();
+		setTimeout(function(){
+			$("#divCenter").fadeOut(1200);
+		}, 5000);
 	});
 });
 

@@ -29,7 +29,7 @@ var descTranslate = {
 "Cloudy"                  :"Nuageux" }
 
 var synthWeatherDesc = {
-	"Partly Cloud"            :"il fera artiellement Nuageux",
+	"Partly Cloudy"           :"il fera partiellement Nuageux",
 	"Showers"                 :"il y aura des averses",
 	"AM Showers"              :"il y aura des averses Matinales",
 	"PM Showers"              :"il y aura des averses En Soirée",
@@ -52,7 +52,9 @@ var synthWeatherDesc = {
 	"Clear"                   :"il fera Dégagé",
 	"Rain"                    :"il fera luvieux",
 	"Cloudy"                  :"il fera nuageux",
-	""						  :"il fera correct" }
+	""						  :"il fera correct" ,
+	"Breezy"				  :"il fera venteux",
+	"Windy"					  :"il fera venteux"}
 var synthWindDirection = {
 	"NE"  : "du nord-est",
 	"NNE" : "du nord-est",
@@ -77,6 +79,8 @@ function getPhraseFromWeather(day){
 		artyom.say("Sorry but this feature is not available in you language.");
 		return;
 	}
+
+	console.log(wheatherInfo.today.synthDesc);
 
 	var phrase = "Aujourd'hui" + " ";
 	if(true){

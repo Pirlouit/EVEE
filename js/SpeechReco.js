@@ -50,7 +50,14 @@ artyom.addCommands({
 });
 
 artyom.addCommands({
-    indexes:["éteint la caméra", "éteint l'appareil photo"],
+    indexes:["bonjour"],
+    action:function(i){
+        FirstHello();
+    }
+});
+
+artyom.addCommands({
+    indexes:["éteint la caméra", "éteint l'appareil photo","coupe la caméra", "coupe l'appareil photo"],
     action:function(i){
         turnOffCamera();
         artyom.say("caméra éteinte");
@@ -65,14 +72,14 @@ artyom.addCommands({
 });
 
 artyom.addCommands({
-    indexes:["enregistre la photo", "sauve la photo"],
+    indexes:["enregistre la photo", "sauve la photo", "sauvegarde la photo"],
     action:function(i){
         savePhoto();        
     }
 });
 
 artyom.addCommands({
-    indexes:["supprime la photo", "annuler la photo"],
+    indexes:["supprime la photo", "annule la photo"],
     action:function(i){
         turnOnCamera();        
     }
@@ -86,10 +93,6 @@ artyom.addCommands({
         artyom.say(getPhraseFromWeather(wildcard));
     }
 });
-
-
-
-
 
 // Afficher une carte d'une ville
 artyom.addCommands({
@@ -121,7 +124,7 @@ artyom.addCommands({
     }
 });
 
-// Afficher la direction pour aller d'un endroit à un autre
+// Répète ce que l'on dis
 artyom.addCommands({
     smart: true,
     indexes:["dis-moi *"], // These spoken words will trigger the execution of the command
@@ -141,9 +144,18 @@ artyom.addCommands({
     }
 });
 
+//allume la radio
+artyom.addCommands({
+    indexes:["allume la radio", "mets la radio"], // These spoken words will trigger the execution of the command
+    action:function(i){ // Action to be executed when a index match with spoken word
+        console.log("radio triggered -> ");
+        BuildRadioIframe();
+    }
+});
+
 // Stop la musique
 artyom.addCommands({
-    indexes:["arrête la musique", "coupe la musique","éteint la musique"], // These spoken words will trigger the execution of the command
+    indexes:["arrête la musique", "coupe la musique","éteint la musique", "arrête la radio", "coupe la radio", "éteins la radio"], // These spoken words will trigger the execution of the command
     action:function(i){ // Action to be executed when a index match with spoken word
         console.log("Music stoped");
         RemoveYTIframe();

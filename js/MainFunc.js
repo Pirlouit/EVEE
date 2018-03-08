@@ -11,8 +11,14 @@ $(function(){
    //setTimeout(FirstHello, 3000);  
 });
 
+var hasSaidHello = false
+
 function FirstHello()
 {    
+    if(hasSaidHello)
+        return;
+
+    hasSaidHello = true;
     artyom.say("Bonjour.");
 
     var todayDate = moment().format("dddd D MMMM");
@@ -29,6 +35,12 @@ function FirstHello()
     minute = (minute == 0) ? "" : minute;    
     artyom.say("Il est " + heure + minute);
 
+    artyom.say(getPhraseFromWeather(""));
+
+    artyom.say("Je vous met maintenant votre radio préféré pour écouter les informations.");
+    setTimeout(BuildRadioIframe, 28000);
+
+    artyom.say("Je vous souhaite une agréable journée.");
         
 }
 function PlayYTSound(query){
@@ -55,6 +67,20 @@ function BuildYTIframe(url, musicName){
             console.log("BuildYTFrame")
             $('#musicContainer').empty();        
             var i = '<iframe width="0" height="0" src=' + url + '?autoplay=1&loop=1&rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>';
+            $('#musicContainer').append(i);
+            $('#musicContainer').append(p);
+            $('#musicContainer').fadeIn(1000);
+        }
+    );
+}
+
+function BuildRadioIframe(){
+    $('#musicContainer').fadeOut(500,
+        function(){
+            var p = '<p class="small">Radio:<br/> Classic 21</p>';
+            console.log("BuildRadioFrame")
+            $('#musicContainer').empty();        
+            var i = '<iframe width="0" height="0" src="/iframe/radio/classic21.html" frameborder="0" ></iframe>';
             $('#musicContainer').append(i);
             $('#musicContainer').append(p);
             $('#musicContainer').fadeIn(1000);
